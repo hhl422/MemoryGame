@@ -1,0 +1,59 @@
+body {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 30px;
+    background: url("../img/geometry2.png");
+}
+
+.gametitle {
+    padding: 10px 0 10px 0;
+}
+
+.gamecontent {
+}
+
+.gamearea {
+    background-color: #9acfea;
+    border-radius: 8px;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    width: 520px;
+}
+
+.copyright {
+}
+
+.row {
+    margian-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+div.block {
+    text-align: center;
+    border-radius: 8px;
+    background-color: #1b6dcc;
+    min-height: 100px;
+    min-width: 100px;
+}
+
+.glyphicon {
+    margin-top: 35px;
+}
+
+div.block.span {
+    margin: 0 auto;
+}
+
+.block.open {
+    transform: rotateY(0);
+}
+
+.block.show {
+    background-color: #5bc0de;
+}
+
+.block.match {
+    background-color: #67b168;
+}
