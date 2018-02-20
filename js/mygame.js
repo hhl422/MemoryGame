@@ -4,11 +4,18 @@ var i = -1;//前一个被翻开的方块序号
 var temp = {};//前一个被翻开的方块属性
 var content = [];//匹配内容
 var blocks;
+var clicktimes = 0;
+var level1 = 24;
+var level2 = 40;
+var level3 = 56;
+var level4 = 72;
+var level5 = 99;
+var nIntervId;
 var icon = ["glyphicon glyphicon-cd","glyphicon glyphicon-camera","glyphicon glyphicon-home","glyphicon glyphicon-fire",
             "glyphicon glyphicon-star-empty","glyphicon glyphicon-tint","glyphicon glyphicon-music","glyphicon glyphicon-star"];
 var list = [0,1,2,3,4,5,6,7,0,1,2,3,4,5,6,7];
-var clicktimes = 0;
 var anims = {"show":"flipInX","match":"pulse","wrong":"shake","mouseover":"bounce"};
+
 //生成图片块
 $(document).ready(function () {
     var colmd3 = $(".col-md-3");
@@ -24,24 +31,13 @@ $(document).ready(function () {
 window.onload = function () {
     var randomlist = shuffle(list);
 
-    //TODO 添加悬停效果
-    $(".block").hover(function(){
-        $(this).removeClass().addClass(anims["mouseover"] + ' animated block').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-            $(this).removeClass().addClass("block");
-        });
-    },function () {
-    });
-
     blocks = $(".block");
-    // for(var index in blocks) {
-    // blocks 并非一个真正的数组，而是一个叫做 HTMLCollection 的集合，此集合除了16个block元素以外，还包含一个叫做 length 的属性，又因为 for...in 循环的是属性，所以实际循环/执行了17次，这就导致了控制台报错，因为最后的所谓 index 不是个数字，而是 length :
     for (var index = 0; index < blocks.length; index++){
         blocks[index].id = index;
         content[index] = "<span class='"+ icon[randomlist[index]]+"' aria-hidden=\"true\"></span>";
         blocks[index].addEventListener("click",mycheck());
     }
 }
-
 
 //闭包返回函数，避免在添加监听时（触发时）被执行
 function mycheck() {
@@ -56,7 +52,7 @@ function mycheck() {
         if(i !== -1 && i === index){
             return;
         }
-        if(index in opened){//opened.hasOwnProperty(index))
+        if(index in opened){
             return;
         }
 
@@ -71,7 +67,6 @@ function mycheck() {
         if (i === -1) {
             i = index;
             temp[i] = content[index] ;
-            blocks[i].removeEventListener("click", mycheck());//TODO 没有用？？？？？
             return;
         }
 
@@ -80,9 +75,6 @@ function mycheck() {
 
             opened[i] = temp[i];
             opened[index] = content[index] ;
-
-            blocks[i].removeEventListener("click", mycheck());
-            blocks[index].removeEventListener("click", mycheck());
 
             $(".show").removeClass().addClass(anims["match"] + ' animated match').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                 $(this).removeClass().addClass("match");
@@ -110,7 +102,6 @@ function mycheck() {
 
         //3.与已翻开的不同
         setTimeout(function () {
-            blocks[i].addEventListener("click", mycheck());
 
             $(".show").removeClass().addClass(anims["wrong"] + ' animated wrong').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                 $(this).removeClass().addClass("block");
@@ -141,13 +132,6 @@ function shuffle(a) {
     }
     return a;
 }
-
-var level1 = 24;
-var level2 = 40;
-var level3 = 56;
-var level4 = 72;
-var level5 = 99;
-var nIntervId;
 
 function updateRateInfo(times) {
     //计时器
