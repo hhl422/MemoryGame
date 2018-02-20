@@ -1,7 +1,7 @@
 body {
     margin: 0 auto;
     text-align: center;
-    font-size: 30px;
+    font-size: 18px;
     background: url("../img/geometry2.png");
 }
 
@@ -9,7 +9,13 @@ body {
     padding: 10px 0 10px 0;
 }
 
+.gameresult {
+    margin: 0 auto;
+    width: 520px;
+}
+
 .gamecontent {
+    font-size: 30px;
 }
 
 .gamearea {
@@ -50,10 +56,25 @@ div.block.span {
     transform: rotateY(0);
 }
 
-.block.show {
+div.show {
+    text-align: center;
+    border-radius: 8px;
+    min-height: 100px;
+    min-width: 100px;
     background-color: #5bc0de;
 }
 
-.block.match {
+div.match {
+    text-align: center;
+    border-radius: 8px;
+    min-height: 100px;
+    min-width: 100px;
     background-color: #67b168;
+}
+div.wrong {
+    text-align: center;
+    border-radius: 8px;
+    min-height: 100px;
+    min-width: 100px;
+    background-color: #55bbcc;
 }
